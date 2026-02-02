@@ -6,7 +6,7 @@ export default function ProfilePage() {
     <div className=''>
             <img src={heroImg} className="h-[35vh] md:h-[40vh] w-full" alt="" />
       
-      <h1 className='text-center font-bold text-[#D9176C] py-25'>Profile</h1>
+      <h1 className='text-center font-bold text-[#D9176C] py-25'>Profille</h1>
     </div>
   )
 }
