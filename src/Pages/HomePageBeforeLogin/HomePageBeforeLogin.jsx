@@ -89,6 +89,7 @@ export default function HomePageBeforeLogin() {
           className="w-full object-cover h-[60vh] md:h-screen "
         />
         <div className="absolute inset-0 bg-black/40 flex md:items-center md:justify-center  ">
+        <h1 className="text-4xl text-red-600">VERSION 123</h1>
           <div className="w-full ">
             <SearchBar />
           </div>
