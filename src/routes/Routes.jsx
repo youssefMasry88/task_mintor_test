@@ -1,4 +1,4 @@
-import {   createBrowserRouter }from "react-router-dom";
+import {  createHashRouter }from "react-router-dom";
 import AppLayout from "../LayOut/AppLayout";
 import HomePageBeforeLogin from "../Pages/HomePageBeforeLogin/HomePageBeforeLogin";
 import AddCodePAge from "../Pages/Authentication/AddCodePAge";
@@ -9,7 +9,7 @@ import LoginPage from "../Pages/Authentication/LoginPage";
 import AboutPage from "../Pages/HomePageAfterLogin/AboutPage";
 import ProfilePage from "../Pages/HomePageAfterLogin/ProfilePage";
 
-export const Router = createBrowserRouter([
+export const Router = createHashRouter([
     {
         path:"/",
         element:<AppLayout/>,
