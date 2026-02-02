@@ -6,28 +6,41 @@ import Facebook from "../../Components/UI/FacebookBtn";
 import Google from "../../Components/UI/GoogleBTn";
 import axios from "axios";
 import * as Yup from "yup";
+import { useAuthStore } from "../../store";
+
 
 export default function LoginPage() {
   const Navigate = useNavigate();
+  const { login } = useAuthStore(); // ✅
 
   const HandelLogin = async (values) => {
-    console.log(values);
-    try{
-      const payload ={
-        email:values.email,
-        password:values.password
+    try {
+      const payload = {
+        email: values.email,
+        password: values.password,
+      };
+
+      const res = await axios.post(
+        "https://bookstore.eraasoft.pro/api/login",
+        payload
+      );
+      const token = res.data?.data?.token || res.data?.token;
+
+      if (token) {
+        login(token); 
+        Navigate("/"); 
+      } else {
+        console.log("Token not found in response:", res.data);
       }
-      const res = await axios.post("https://bookstore.eraasoft.pro/api/login",payload)
-      console.log(res);
-      Navigate("/home_login")
-      }catch(err){
-        console.log(err.response.data);
+    } catch (err) {
+      console.log(err.response.data);
     }
-  }
+  };
+
   const LoginSchema = Yup.object({
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().required("Password is required"),
-  })
+  });
   return (
     <div className=" bg-[#F5F5F5] ">
       <img src={heroImg} className="w-full h-[35vh] md:h-[40vh] " alt="" />

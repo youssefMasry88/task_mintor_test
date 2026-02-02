@@ -15,7 +15,9 @@ import b7 from "../../assets/book7.png";
 import BookCard from "../../Components/BookCard";
 import SaleSection from "../../Components/SaleSection";
 
+
 export default function HomePageBeforeLogin() {
+    
   const book = [
     {
       id: 1,
@@ -94,7 +96,7 @@ export default function HomePageBeforeLogin() {
       </div>
       <div className="content ">
         <div className="service bg-[#F5F5F5] min-h-[50vh] pb-20 md:pb-0">
-          <div className="flex flex-col md:flex md:flex-row md:items-center md:justify-between gap-8 px-10 pt-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 px-10 py-20">
             <div className="flex flex-col items-start justify-center gap-2 ">
               <TbTruckDelivery size={25} />
               <h1 className="text-center font-bold text-black ">

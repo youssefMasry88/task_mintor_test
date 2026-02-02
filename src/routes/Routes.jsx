@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import {  createHashRouter } from "react-router-dom";
 import AppLayout from "../LayOut/AppLayout";
 import HomePageBeforeLogin from "../Pages/HomePageBeforeLogin/HomePageBeforeLogin";
 import AddCodePAge from "../Pages/Authentication/AddCodePAge";
@@ -6,11 +6,10 @@ import ResetPassPage from "../Pages/Authentication/ResetPassPage";
 import ForgetPassPage from "../Pages/Authentication/ForgetPassPage";
 import SignUpPage from "../Pages/Authentication/SignUpPage";
 import LoginPage from "../Pages/Authentication/LoginPage";
-import HomePageAfterLogin from "../Pages/HomePageAfterLogin/HomePageAfterLogin";
 import AboutPage from "../Pages/HomePageAfterLogin/AboutPage";
 import ProfilePage from "../Pages/HomePageAfterLogin/ProfilePage";
 
-export const Router = createBrowserRouter([
+export const Router = createHashRouter([
     {
         path:"/",
         element:<AppLayout/>,
@@ -18,10 +17,6 @@ export const Router = createBrowserRouter([
             {
                 index: true,
                 element: <HomePageBeforeLogin/>
-            },
-            {
-                path:"/home_login",
-                element:<HomePageAfterLogin/>
             },
             {
                 path:"/login",

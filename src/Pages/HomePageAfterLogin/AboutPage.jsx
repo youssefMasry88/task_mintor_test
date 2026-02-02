@@ -6,8 +6,43 @@ import { RiCustomerService2Fill } from "react-icons/ri";
 import { Link } from "react-router";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FiPhone, FiMail, FiMapPin, FiUser, FiEdit3 } from "react-icons/fi";
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, ErrorMessage } from "formik";
+import axios from "axios";
+import * as Yup from "yup";
+
 export default function AboutPage() {
+  const ContactSchema = Yup.object({
+    name: Yup.string().required("Name is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    message: Yup.string()
+      .min(5, "Message is too short")
+      .required("Message is required"),
+  });
+
+  const handelSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      const payload = {
+        name: values.name,
+        email: values.email,
+        message: values.message,
+      };
+
+      const res = await axios.post(
+        "https://bookstore.eraasoft.pro/api/contacts/store",
+        payload
+      );
+
+      console.log("Contact sent:", res.data);
+      resetForm();
+      alert("Message sent successfully ✅");
+    } catch (err) {
+      console.log(err.response?.data || err.message);
+      alert("Something went wrong ");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div>
       {/* Hero */}
@@ -114,48 +149,80 @@ export default function AboutPage() {
                 et ultricies est. Aliquam in justo varius, sagittis neque ut,
                 malesuada leo.
               </p>
-              <Formik initialValues={{ email: "" , name:"", message:""}}>
-                <Form className="mt-10 space-y-5 max-w-xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="relative">
-                      <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50" />
-                      <Field
-                      name="name"
-                        type="text"
-                        placeholder="Name"
-                        className="w-full bg-white/5 border border-white/15 rounded-lg pl-11 pr-4 py-3
-                               text-white placeholder:text-white/40 outline-none"
-                      />
-                    </div>
+              
+<Formik
+  initialValues={{ name: "", email: "", message: "" }}
+  validationSchema={ContactSchema}
+  onSubmit={handelSubmit}
+>
 
-                    <div className="relative">
-                      <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50" />
-                      <Field
-                      name="email"
-                        type="email"
-                        placeholder="Email Address"
-                        className="w-full bg-white/5 border border-white/15 rounded-lg pl-11 pr-4 py-3
-                               text-white placeholder:text-white/40 outline-none"
-                      />
-                    </div>
-                  </div>
+  {({ isSubmitting }) => (
+    <Form className="mt-10 space-y-5 max-w-xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Name */}
+        <div className="relative">
+          <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50" />
+          <Field
+            name="name"
+            type="text"
+            placeholder="Name"
+            className="w-full bg-white/5 border border-white/15 rounded-lg pl-11 pr-4 py-3
+                   text-white placeholder:text-white/40 outline-none"
+          />
+          <ErrorMessage
+            name="name"
+            component="div"
+            className="text-[#D9176C] text-sm mt-1"
+          />
+        </div>
 
-                  <div className="relative">
-                    <FiEdit3 className="absolute left-4 top-4 text-white/50" />
-                    <textarea
-                      name="message"
-                      placeholder="Your Message"
-                      rows={6}
-                      className="w-full bg-white/5 border border-white/15 rounded-lg pl-11 pr-4 py-3
-                             text-white placeholder:text-white/40 outline-none resize-none"
-                    />
-                  </div>
+        {/* Email */}
+        <div className="relative">
+          <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50" />
+          <Field
+            name="email"
+            type="email"
+            placeholder="Email Address"
+            className="w-full bg-white/5 border border-white/15 rounded-lg pl-11 pr-4 py-3
+                   text-white placeholder:text-white/40 outline-none"
+          />
+          <ErrorMessage
+            name="email"
+            component="div"
+            className="text-[#D9176C] text-sm mt-1"
+          />
+        </div>
+      </div>
 
-                  <button className="bg-[#D9176C] hover:bg-[#B71059] transition px-10 py-3 rounded-lg font-semibold">
-                    Send Message
-                  </button>
-                </Form>
-              </Formik>
+      {/* Message */}
+      <div className="relative">
+        <FiEdit3 className="absolute left-4 top-4 text-white/50" />
+        <Field
+          as="textarea"
+          name="message"
+          placeholder="Your Message"
+          rows={6}
+          className="w-full bg-white/5 border border-white/15 rounded-lg pl-11 pr-4 py-3
+                 text-white placeholder:text-white/40 outline-none resize-none"
+        />
+        <ErrorMessage
+          name="message"
+          component="div"
+          className="text-[#D9176C] text-sm mt-1"
+        />
+      </div>
+
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="bg-[#D9176C] hover:bg-[#B71059] transition px-10 py-3 rounded-lg font-semibold disabled:opacity-60"
+      >
+        {isSubmitting ? "Sending..." : "Send Message"}
+      </button>
+    </Form>
+  )}
+</Formik>
+
             </div>
 
             {/* Right */}

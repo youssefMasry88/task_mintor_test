@@ -2,27 +2,27 @@ import React, { useRef } from "react";
 import heroImg from "../../assets/5176119115_f157862569_o 1.png";
 import { Field, Form, Formik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 
-export default function ResetPassPage() {
+export default function AddCodePage() {
   const navigate = useNavigate();
   const inputsRef = useRef([]);
 
-  const HandleSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = (values, { setSubmitting }) => {
     const otp = values.d1 + values.d2 + values.d3 + values.d4;
 
     try {
-      const payload = { code: otp };
+      if (otp.length !== 4) {
+        alert("Please enter the 4-digit code");
+        return;
+      }
 
-      const res = await axios.post(
-        "https://bookstore.eraasoft.pro/api/reset-password",
-        payload
-      );
+      
+      localStorage.setItem("otp", otp);
 
-      console.log(res.data);
+      
       navigate("/reset_pass");
     } catch (error) {
-      console.log(error?.response?.data || error.message);
+      console.log(error?.message);
     } finally {
       setSubmitting(false);
     }
@@ -34,18 +34,14 @@ export default function ResetPassPage() {
 
       <div className="md:h-[70vh] h-[55vh] flex flex-col items-center justify-center pb-30">
         <h1 className="text-center font-bold text-[#D9176C] pt-10 md:pt-20">
-          Reset your password!
+          Enter verification code
         </h1>
 
         <p className="text-center pt-4 pb-5 text-sm text-gray-400 md:text-lg">
           Enter the 4 digits code that you received on your email
         </p>
 
-        <Formik
-          initialValues={{ d1: "", d2: "", d3: "", d4: "" }}
-          onSubmit={HandleSubmit}
-          
-        >
+        <Formik initialValues={{ d1: "", d2: "", d3: "", d4: "" }} onSubmit={handleSubmit}>
           <Form className="Login_content">
             <div className="Email flex gap-5">
               {[0, 1, 2, 3].map((i) => (
@@ -61,12 +57,12 @@ export default function ResetPassPage() {
                         field.onChange(e);
 
                         if (e.target.value && i < 3) {
-                          inputsRef.current[i + 1].focus();
+                          inputsRef.current[i + 1]?.focus();
                         }
                       }}
                       onKeyDown={(e) => {
                         if (e.key === "Backspace" && !field.value && i > 0) {
-                          inputsRef.current[i - 1].focus();
+                          inputsRef.current[i - 1]?.focus();
                         }
                       }}
                     />
@@ -80,14 +76,14 @@ export default function ResetPassPage() {
                 type="submit"
                 className="bg-[#D9176C] text-white w-full py-2 rounded-md hover:shadow-xl hover:border-white"
               >
-                Reset password
+                Continue
               </button>
             </div>
 
             <div className="account_login flex items-center justify-center pt-7">
               <p>
                 Didn’t receive a code?
-                <Link to="/reset_pass" className="text-[#D9176C] ml-1 font-medium">
+                <Link to="/forgot-password" className="text-[#D9176C] ml-1 font-medium">
                   Send again
                 </Link>
               </p>
