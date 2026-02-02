@@ -1,5 +1,4 @@
-import {  createHashRouter
- } from "react-router-dom";
+import {  createHashRouter }from "react-router-dom";
 import AppLayout from "../LayOut/AppLayout";
 import HomePageBeforeLogin from "../Pages/HomePageBeforeLogin/HomePageBeforeLogin";
 import AddCodePAge from "../Pages/Authentication/AddCodePAge";
