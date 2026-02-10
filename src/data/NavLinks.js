@@ -14,5 +14,9 @@ export const NavLinks = [
         path: "/About",
         name: "About Us",
     },
+    {
+        path: "/SinglePage",
+        name: "SinglePage",
+    },
    
 ];

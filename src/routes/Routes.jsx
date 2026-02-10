@@ -8,6 +8,8 @@ import SignUpPage from "../Pages/Authentication/SignUpPage";
 import LoginPage from "../Pages/Authentication/LoginPage";
 import AboutPage from "../Pages/HomePageAfterLogin/AboutPage";
 import ProfilePage from "../Pages/HomePageAfterLogin/ProfilePage";
+import BooksPage from "../Pages/HomePageAfterLogin/BooksPage";
+import SinglePage from "../Pages/HomePageAfterLogin/SinglePage";
 
 export const Router = createHashRouter([
     {
@@ -47,7 +49,14 @@ export const Router = createHashRouter([
                 path:"/profile",
                 element:<ProfilePage/>
             },
-            
+            {
+                path:"/books",
+                element:<BooksPage/>
+            },
+            {
+                path:"/SinglePage",
+                element:<SinglePage/>
+            }
             
         ]
     }
