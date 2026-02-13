@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import heroImg from "../../assets/hero2.png";
-import FiltersSideBar from "../../Components/BooksPage/FiltersSidebar";
-import BooksTopBar from "../../Components/BooksPage/BooksTopBar";
-import CategoryChips from "../../Components/BooksPage/CategoryChips";
-import BookCards from "../../Components/BooksPage/BookCards";
-import Pagination from "../../Components/BooksPage/Pagination";
+import heroImg from "../../../assets/hero2.png";
+import FiltersSideBar from "../../../Components/BooksPage/FiltersSidebar";
+import BooksTopBar from "../../../Components/BooksPage/BooksTopBar";
+import CategoryChips from "../../../Components/BooksPage/CategoryChips";
+import BookCards from "../../../Components/BooksPage/BookCards";
+import Pagination from "../../../Components/BooksPage/Pagination";
 import axios from "axios";
 
 export default function BooksPage() {

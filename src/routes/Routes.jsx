@@ -8,8 +8,12 @@ import SignUpPage from "../Pages/Authentication/SignUpPage";
 import LoginPage from "../Pages/Authentication/LoginPage";
 import AboutPage from "../Pages/HomePageAfterLogin/AboutPage";
 import ProfilePage from "../Pages/HomePageAfterLogin/ProfilePage";
-import BooksPage from "../Pages/HomePageAfterLogin/BooksPage";
-import SinglePage from "../Pages/HomePageAfterLogin/SinglePage";
+import BooksPage from "../Pages/HomePageAfterLogin/Books/BooksPage";
+import SinglePage from "../Pages/HomePageAfterLogin/Books/SinglePage";
+import MyCart from "../Pages/HomePageAfterLogin/Books/MyCart";
+import WishList from "../Pages/HomePageAfterLogin/Books/WishList";
+import CheckOut from "../Pages/HomePageAfterLogin/Books/CheckOut";
+import OrdersHistory from "../Pages/HomePageAfterLogin/Books/OrdersHistory";
 
 export const Router = createHashRouter([
     {
@@ -56,6 +60,22 @@ export const Router = createHashRouter([
             {
                 path:"/SinglePage",
                 element:<SinglePage/>
+            },
+            {
+                path:"/myCart",
+                element:<MyCart/>
+            },
+            {
+                path:"/wishlist",
+                element:<WishList/>
+            },
+            {
+                path:"/Checkout",
+                element:<CheckOut/>
+            },
+            {
+                path:"/History",
+                element:<OrdersHistory/>
             }
             
         ]

@@ -13,7 +13,8 @@ import b5 from "../../assets/book5.png";
 import b6 from "../../assets/book6.png";
 import b7 from "../../assets/book7.png";
 import BookCard from "../../Components/BookCard";
-import SaleSection from "../../Components/SaleSection";
+import SaleSection from "../../Components/RecommendedSection";
+import SaleBook from "../../Components/salebook";
 
 
 export default function HomePageBeforeLogin() {
@@ -160,7 +161,8 @@ export default function HomePageBeforeLogin() {
           </div>
         </div>
         <div>
-          <SaleSection books={book} />
+          <SaleBook />
+
         </div>
       </div>
     </div>
